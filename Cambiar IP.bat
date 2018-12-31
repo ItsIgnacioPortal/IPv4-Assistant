@@ -37,8 +37,7 @@ if %menu2%==3 goto :ConfigDHCP
 if %menu2%==4 goto :ConfigPerfiles
 if %menu2%==99 goto :bye
 
-
-
+::-----------------------------------------------------------------------------------------------------------------
 
 :ConfigIPTipica
 cls
@@ -53,10 +52,7 @@ echo DNS Secundario establecido (192.168.0.1)
 pause
 goto :main
 
-
-
-
-
+::-----------------------------------------------------------------------------------------------------------------
 
 :ConfigCustom
 cls
@@ -101,9 +97,7 @@ echo LISTO!
 pause
 goto :main
 
-
-
-
+::-----------------------------------------------------------------------------------------------------------------
 
 :ConfigDHCP
 cls
@@ -117,9 +111,7 @@ echo Todo listo!
 pause
 goto :main
 
-
-
-
+::-----------------------------------------------------------------------------------------------------------------
 
 :ConfigPerfiles
 echo Perfiles disponibles: 
@@ -129,30 +121,54 @@ echo 2 - WifiTipico(192.168.0.x)
 echo 99 - VOLVER AL MENU PRINCIPAL
 echo ----------------------------------------
 SET /P ConfigPerfilesMenu1="(1/2/99): "
-if %ConfigPerfilesMenu1%==1 goto :ConfigPerfilesPerfil1
-if %ConfigPerfilesMenu1%==2 goto :ConfigPerfilesPerfil2
+if %ConfigPerfilesMenu1%==1 goto :PERFIL1
+if %ConfigPerfilesMenu1%==2 goto :PERFIL2
 if %ConfigPerfilesMenu1%==99 goto :main
 
-:ConfigPerfilesPerfil1
+::-----------------------------------------------------------------------------------------------------------------
+
+:PERFIL1
+set PERFIL_IPV4ADDR=192.168.43.52
+set PERFIL_IPV4MASK=255.255.255.0
+set PERFIL_IPV4GATEWAY=192.168.43.1
+set PERFIL_DNSTYPE=dhcp
+goto :ConfigPerfilesAplicar
+
+::-----------------------------------------------------------------------------------------------------------------
+
+:PERFIL2
+set PERFIL_IPV4ADDR=192.168.0.31
+set PERFIL_IPV4MASK=255.255.255.0
+set PERFIL_IPV4GATEWAY=192.168.0.1
+set PERFIL_DNSTYPE=static
+set PERFIL_DNS1=8.8.8.8
+set PERFIL_DNS2=192.168.0.1
+goto :ConfigPerfilesAplicar
+
+::-----------------------------------------------------------------------------------------------------------------
+
+:ConfigPerfilesAplicar
 cls
+echo Configuracion del perfil seleccionado:
+
 echo Estableciendo configuracion IPv4...
-netsh interface ipv4 set address name="%interface%" static 192.168.43.52 mask=255.255.255.0 gateway=192.168.43.1
+netsh interface ipv4 set address name="%interface%" static %IPV4ADDR% mask=%IPV4MASK% gateway=%IPV4GATEWAY%
+if DNSTYPE==dhcp (
+	netsh interface ipv4 set dnsservers name"%interface%" source=dhcp
+	echo     DNS de %interface% establecido a DHCP
+) else (
+	netsh interface ipv4 add dnsserver name="%interface%" static %PERFIL_DNS1% index=1
+		echo     DNS Primario de %interface% establecido a %PERFIL_DNS1%
+	netsh interface ipv4 add dnsserver name="%interface%" static %PERFIL_DNS2% index=2
+		echo     DNS Secundario de %interface% establecido a %PERFIL_DNS2%
+)
 netsh interface ipv4 show config "%interface%"
 pause
 goto :main
 
-:ConfigPerfilesPerfil2
-cls
-echo Estableciendo configuracion IPv4...
-netsh interface ipv4 set address name="%interface%" static 192.168.0.31 mask=255.255.255.0 gateway=192.168.0.1
-netsh interface ipv4 show config "%interface%"
-pause
-goto :main
 
 
-
-
-
+::-----------------------------------------------------------------------------------------------------------------
 
 :bye
 ::Salir del programa
