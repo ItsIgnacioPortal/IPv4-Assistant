@@ -2,7 +2,9 @@
 
 
 
-<b>English:</b>
+
+# English
+
 A simple assistant made in batch, to quickly change the IPv4 configuration on Windows.
 This tool uses "netsh" to manage your IPv4 configuration.
 
@@ -13,6 +15,7 @@ This tool uses "netsh" to manage your IPv4 configuration.
   <li>Wifi 2</li>
   <li>Ethernet 2</li>
 </ul>
+
 
 
 <h2>Profiles</h2>
@@ -28,7 +31,11 @@ There currently are only 2 'hardcoded' profiles:
 <b>NOTE:The default Primary DNS server for "Tipical Wifi" is CloudFlare's (1.1.1.1), but the one in "AndroidAP" is DHCP.</b>
 
 
-<b>Español:</b>
+
+
+
+# Español
+
 Un simple asistente echo en batch, para cambiar rapidamente la configuracion IPv4 en Windows.
 Esta herramienta usa principalmente "netsh" para cambiar la configuracion.
 
@@ -39,6 +46,7 @@ Esta herramienta usa principalmente "netsh" para cambiar la configuracion.
   <li>Wifi 2</li>
   <li>Ethernet 2</li>
 </ul>
+
 
 
 <h2>Perfiles</h2>
