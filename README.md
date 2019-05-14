@@ -53,7 +53,7 @@ Esta herramienta usa principalmente "netsh" para cambiar la configuracion.
 
 Actualmente solo hay 2 perfiles "hardcodeados":
 
-ul>
+<ul>
   <li>AndroidAP (192.168.43.52)</li>
   <li>Tipical Wifi (192.168.0.31)</li>
 </ul>
