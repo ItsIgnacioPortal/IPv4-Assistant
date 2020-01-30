@@ -1,5 +1,5 @@
 # IPv4-Assistant
-
+[![HitCount](http://hits.dwyl.io/PinkDev1/IPv4-Assistant.svg)](http://hits.dwyl.io/PinkDev1/IPv4-Assistant)
 
 
 
